@@ -1,0 +1,271 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #000;
+  overflow: hidden;
+  font-family: 'Share Tech Mono', monospace;
+  color: #fff;
+}
+
+#gameCanvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* ── HUD ─────────────────────────────────────────────── */
+#hud {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  padding: 18px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.hud-block { display: flex; flex-direction: column; gap: 2px; }
+
+.hud-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #4af0ff88;
+  text-transform: uppercase;
+}
+
+.hud-value {
+  font-family: 'Orbitron', monospace;
+  font-size: 26px;
+  font-weight: 700;
+  color: #4af0ff;
+  text-shadow: 0 0 20px #4af0ffaa;
+  line-height: 1;
+}
+
+#speed-bar-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+#speed-bar-bg {
+  width: 120px;
+  height: 6px;
+  background: #ffffff15;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+#speed-bar {
+  height: 100%;
+  width: 10%;
+  background: linear-gradient(90deg, #4af0ff, #ff4a9b);
+  border-radius: 3px;
+  transition: width 0.5s ease;
+  box-shadow: 0 0 8px #4af0ff;
+}
+
+/* ── LEVEL BANNER ────────────────────────────────────── */
+#level-banner {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 15;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+#level-banner.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+#level-banner.hide {
+  opacity: 0;
+  transform: scale(1.15);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.banner-sub {
+  font-size: 11px;
+  letter-spacing: 6px;
+  color: #4af0ffaa;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.banner-number {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(4rem, 15vw, 9rem);
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(135deg, #4af0ff 0%, #ff4a9b 60%, #ffcc00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 40px #4af0ff88);
+}
+
+.banner-line {
+  width: 160px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #4af0ff, transparent);
+  margin-top: 12px;
+  animation: lineExpand 0.4s ease forwards;
+}
+
+@keyframes lineExpand {
+  from { width: 0; opacity: 0; }
+  to   { width: 160px; opacity: 1; }
+}
+
+/* ── SCREENS ─────────────────────────────────────────── */
+.screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  background: radial-gradient(ellipse at center, #0a001aee 0%, #000000f5 100%);
+  backdrop-filter: blur(2px);
+}
+
+.screen.hidden { display: none; }
+
+.screen-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 900;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #4af0ff 0%, #ff4a9b 50%, #ffcc00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 30px #4af0ff66);
+  margin-bottom: 8px;
+}
+
+.screen-subtitle {
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: #ffffff44;
+  margin-bottom: 48px;
+  text-transform: uppercase;
+}
+
+.stat-row {
+  display: flex;
+  gap: 60px;
+  margin-bottom: 40px;
+}
+
+.stat-item { text-align: center; }
+
+.stat-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: #4af0ff66;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.stat-val {
+  font-family: 'Orbitron', monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #4af0ff;
+  text-shadow: 0 0 20px #4af0ff88;
+}
+
+.btn {
+  font-family: 'Orbitron', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  padding: 16px 48px;
+  border: 1px solid #4af0ff55;
+  background: transparent;
+  color: #4af0ff;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #4af0ff11;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.btn:hover::before { transform: scaleX(1); }
+.btn:hover {
+  border-color: #4af0ffaa;
+  box-shadow: 0 0 25px #4af0ff44, inset 0 0 25px #4af0ff11;
+  color: #fff;
+}
+
+.controls-info {
+  margin-top: 36px;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px; height: 32px;
+  border: 1px solid #ffffff33;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #ffffff88;
+  background: #ffffff08;
+}
+
+.key-label { font-size: 11px; color: #ffffff44; letter-spacing: 2px; }
+
+/* ── SCANLINES ───────────────────────────────────────── */
+#scanlines {
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    #00000018 2px,
+    #00000018 4px
+  );
+  pointer-events: none;
+  z-index: 30;
+}
+
+/* ── DEATH FLASH ─────────────────────────────────────── */
+#flash {
+  position: fixed;
+  inset: 0;
+  background: #ff003388;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 25;
+  transition: opacity 0.08s;
+}
