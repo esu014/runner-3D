@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STELLAR ESCAPE</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<canvas id="gameCanvas"></canvas>
+<div id="scanlines"></div>
+<div id="flash"></div>
+
+<!-- HUD -->
+<div id="hud" class="hidden">
+  <div class="hud-block">
+    <span class="hud-label">Score</span>
+    <span class="hud-value" id="score-display">0</span>
+  </div>
+  <div id="speed-bar-wrap">
+    <span class="hud-label">Velocidad</span>
+    <div id="speed-bar-bg"><div id="speed-bar"></div></div>
+  </div>
+  <div class="hud-block" style="text-align:right">
+    <span class="hud-label">Nivel</span>
+    <span class="hud-value" id="level-display">1</span>
+  </div>
+</div>
+
+<!-- LEVEL BANNER -->
+<div id="level-banner">
+  <span class="banner-sub">Nivel</span>
+  <div class="banner-number" id="banner-number">1</div>
+  <div class="banner-line"></div>
+</div>
+
+<!-- START SCREEN -->
+<div id="start-screen" class="screen">
+  <div class="screen-title">STELLAR ESCAPE</div>
+  <div class="screen-subtitle">Endless Space Survival</div>
+  <button class="btn" id="start-btn">INICIAR MISIÓN</button>
+  <div class="controls-info">
+    <span class="key">←</span><span class="key">→</span>
+    <span class="key-label">MOVER</span>
+    <span style="color:#ffffff22">|</span>
+    <span class="key">↑</span><span class="key">SPACE</span>
+    <span class="key-label">SALTAR</span>
+  </div>
+</div>
+
+<!-- GAME OVER SCREEN -->
+<div id="gameover-screen" class="screen hidden">
+  <div class="screen-title">GAME OVER</div>
+  <div class="screen-subtitle">Nave destruida</div>
+  <div class="stat-row">
+    <div class="stat-item">
+      <div class="stat-label">Puntuación</div>
+      <div class="stat-val" id="final-score">0</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">Mejor</div>
+      <div class="stat-val" id="best-score">0</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-label">Nivel</div>
+      <div class="stat-val" id="final-level">1</div>
+    </div>
+  </div>
+  <button class="btn" id="restart-btn">REINTENTAR</button>
+</div>
+
+<!-- Three.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="js/game.js"></script>
+
+</body>
+</html>
